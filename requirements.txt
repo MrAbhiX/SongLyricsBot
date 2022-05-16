@@ -1,0 +1,10 @@
+pyrogram==1.4.16
+bs4
+beautifulsoup4
+requests
+python-dotenv
+TgCrypto
+aiohttp[speedups]
+gitpython
+pytz
+APScheduler
