@@ -1,5 +1,5 @@
 from pyrogram import Client
-from .Config import Configs
+from Config import Configs
 
 
 config = Configs()
