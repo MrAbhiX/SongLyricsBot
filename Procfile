@@ -1,1 +1,1 @@
-lakshu: python3 -m Abhi-Lakshu
+lakshu: python3 al.py
