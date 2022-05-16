@@ -1,1 +1,1 @@
-CMD python3 -m Abhi-Lakshu
+CMD bash Abhi-Lakshu
