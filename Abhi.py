@@ -1,8 +1,7 @@
 from pyrogram import Client
-from Config import Configs
+from Config import config
 
 
-config = Configs()
 
 Bot = Client(
     ":SongLyricsBot:",
@@ -12,5 +11,5 @@ Bot = Client(
   )
 
 
-Bot.start()
+Bot.run()
 print("BOT STARTED SUCCESSFULLY")
