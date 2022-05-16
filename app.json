@@ -3,7 +3,7 @@
   "description": "Open Source bot to stream media trough Telegram Voice Chat. Powered by PyTgCalls and Pyrogram",
   "keywords": ["bestiemusic", "musicbot", "video-stream", "videochat", "voicechat", "telegram"],
   "repository": "https://github.com/MrAbhiX/OMFOMUSIC",
-  "stack": "container",
+  
   "env": {
     "API_ID": {
       "description": "Fill it with your API_ID, get it from my.telegram.org/apps",
