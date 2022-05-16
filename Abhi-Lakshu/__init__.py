@@ -12,4 +12,5 @@ Bot = Client(
   )
 
 
-
+Bot.start()
+print("BOT STARTED SUCCESSFULLY")
