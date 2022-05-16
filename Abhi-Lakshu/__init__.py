@@ -11,5 +11,5 @@ Bot = Client(
     bot_token=config.BOT_TOKEN,
   )
 
-bot.start()
+Bot.start()
 print("BOT STARTED SUCCESSFULLY")
