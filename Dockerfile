@@ -14,4 +14,4 @@ WORKDIR /app/
 
 RUN pip3 install --no-cache-dir --upgrade --requirement requirements.txt
 
-CMD bash Abhi-Lakshu
+CMD bash start
