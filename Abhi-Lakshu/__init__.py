@@ -10,3 +10,6 @@ Bot = Client(
     config.API_HASH,
     bot_token=config.BOT_TOKEN,
   )
+
+bot.start()
+print("BOT STARTED SUCCESSFULLY")
