@@ -2,7 +2,7 @@ from pyrogram import Client
 from .Config import Configs
 
 
-config = Config()
+config = Configs()
 
 Bot = Client(
     ":SongLyricsBot:",
