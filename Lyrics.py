@@ -1,8 +1,8 @@
-from . import Bot
+from Abhi import Bot
 from pyrogram import filters
 from pyrogram.types import Message
 
-from .Search import get_lyrics, get_artist, get_title
+from Search import get_lyrics, get_artist, get_title
 from Helper import parse_url
 
 
