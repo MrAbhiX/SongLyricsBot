@@ -1,1 +1,1 @@
-worker: python3 -m Abhi-Lakshu
+worker: python3 Abhi-Lakshu
