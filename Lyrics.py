@@ -1,12 +1,12 @@
 from Abhi import Bot
-from pyrogram import filters
+from pyrogram import filters, Client
 from pyrogram.types import Message
 
 from Search import get_lyrics, get_artist, get_title
 from Helper import parse_url
 
 
-@Bot.on_message(filters.command("lyrics"))
+@Client.on_message(filters.command("lyrics") & filters.group)
 async def _get_lyrics(_, message: Message):
     chat_id = message.chat.id
     if len(message.command) < 2:
