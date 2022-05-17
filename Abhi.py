@@ -1,5 +1,5 @@
 from pyrogram import Client, filters
-from Config import config
+from pyrogram import Client, filters
 from urllib.request import urlopen as u_reqs, Request
 from bs4 import BeautifulSoup as Soup
 from pyrogram.types import Message
