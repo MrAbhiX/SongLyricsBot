@@ -14,7 +14,10 @@ bot = Client(
     api_hash = os.environ["API_HASH"]
 )
 
-
+ARQ_API_URL = os.environ.get("ARQ_API_URL", None)
+ARQ_API_KEY = os.environ.get("ARQ_API_KEY", None)
+    
+    
 aiohttpsession = ClientSession()
 
 arq = ARQ(ARQ_API_URL, ARQ_API_KEY, aiohttpsession)
