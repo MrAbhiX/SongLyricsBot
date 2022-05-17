@@ -8,3 +8,5 @@ aiohttp[speedups]
 gitpython
 pytz
 APScheduler
+aiohttp
+python-arq
