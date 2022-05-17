@@ -52,7 +52,7 @@ def get_title(page_soup: Soup):
     return containers[0].text
 
 
-@Client.on_message(filters.command("lyrics") & filters.group)
+@bot.on_message(filters.command("lyrics") & filters.group)
 async def _get_lyrics(_, message: Message):
     chat_id = message.chat.id
     if len(message.command) < 2:
