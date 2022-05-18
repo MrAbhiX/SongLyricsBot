@@ -1,5 +1,5 @@
 from pyrogram import Client, filters, idle
-from aiohttp import ClientSession as session
+from aiohttp import ClientSession
 from Python_ARQ import ARQ
 from urllib.request import urlopen as u_reqs, Request
 from bs4 import BeautifulSoup as Soup
