@@ -53,6 +53,20 @@ def get_title(page_soup: Soup):
     # containerize
     containers = page_soup.find_all("span", {"class": "BNeawe tAd8D AP7Wnd"})
     return containers[0].text
+
+
+@Client.on_message(filters.command("lyrics"))
+async def _get_lyrics(_, message: Message):
+    chat_id = message.chat.id
+    if len(message.command) < 2:
+        return await message.reply((chat_id, "invalid_lyrics"))
+    query = message.text.strip().split(None, 1)[1]
+    lek = await message.reply((chat_id, "searching"))
+    google_link = f"https://google.com/search?q={query}+lyrics"
+    parsed = parse_url(google_link)
+    lyrics, title, artist = get_lyrics(parsed), get_title(parsed), get_artist(parsed)
+    await lek.edit((chat_id, "**Title: {}**\n**Artist: {}**\n\n**Lyrics: **\n{}").format(title, artist, lyrics))
+
 bot.start()
 print(
         """
