@@ -1,6 +1,5 @@
-from pyrogram import Client, filters, idle
-from aiohttp import ClientSession
-from Python_ARQ import ARQ
+from pyrogram import Client, filters
+
 from urllib.request import urlopen as u_reqs, Request
 from bs4 import BeautifulSoup as Soup
 from pyrogram.types import Message
@@ -15,52 +14,51 @@ bot = Client(
     api_hash = os.environ["API_HASH"]
 )
 
-ARQ_API_URL = os.environ.get("ARQ_API_URL", None)
-ARQ_API_KEY = os.environ.get("ARQ_API_KEY", None)
-    
- 
 
-@bot.on_message(filters.command("lyrics") & ~filters.edited)
-async def lyrics_func(_, message):
-    if len(message.command) < 2:
-        return await message.reply_text("**Usage:**\n/lyrics [QUERY]")
-    m = await message.reply_text("**Searching**")
-    query = message.text.strip().split(None, 1)[1]
+def parse_url(url: str):
+    # read url
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0"
+    }
+    req = Request(url, headers=headers)
+    u_client = u_reqs(req)
 
-    resp = await arq.lyrics(query)
+    page_html = u_client.read()
+    u_client.close()
 
-    if not (resp.ok and resp.result):
-        return await m.edit("No lyrics found.")
+    # scrape page as html
+    page_soup = Soup(page_html, "html.parser")
 
-    song = resp.result[0]
-    song_name = song['song']
-    artist = song['artist']
-    lyrics = song['lyrics']
-    msg = f"**{song_name}** | **{artist}**\n\n__{lyrics}__"
-          
-    if len(msg) > 4095:
-        msg = await paste(msg)
-        msg = f"**LYRICS_TOO_LONG:** [URL]({msg})"
-    return await m.edit(msg)
+    return page_soup
 
-async def main():
-    global arq
-    session = ClientSession()
-    arq = ARQ(ARQ_API_URL, ARQ_API_KEY, session)
 
-    await bot.start()
-    print(
+def get_lyrics(page_soup: Soup):
+    # containerize
+    containers = page_soup.find_all("div", {"class": "BNeawe tAd8D AP7Wnd"})
+    lyrics = []
+
+    for i in range(0, len(containers), 2):
+        lyrics.append(containers[i].text)
+    lyrics_str = "".join([str(x) for x in lyrics]).strip("\n")
+    return lyrics_str
+
+
+def get_artist(page_soup: Soup):
+    # containerize
+    containers = page_soup.find_all("span", {"class": "BNeawe s3v9rd AP7Wnd"})
+    return containers[1].text
+
+
+def get_title(page_soup: Soup):
+    # containerize
+    containers = page_soup.find_all("span", {"class": "BNeawe tAd8D AP7Wnd"})
+    return containers[0].text
+bot.start()
+print(
         """
 -----------------
 | Bot Started! |
 -----------------
 """
     )
-    await idle()
-
-
-loop = get_event_loop()
-loop.run_until_complete(main())
-
-
-
+ 
