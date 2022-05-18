@@ -1,11 +1,12 @@
-from pyrogram import Client, filters
-from aiohttp import ClientSession
+from pyrogram import Client, filters, idle
+from aiohttp import ClientSession as session
 from Python_ARQ import ARQ
 from urllib.request import urlopen as u_reqs, Request
 from bs4 import BeautifulSoup as Soup
 from pyrogram.types import Message
 import os
 import asyncio
+from asyncio import get_event_loop
 
 bot = Client(
     "Song Lyrics Bot",
@@ -17,10 +18,7 @@ bot = Client(
 ARQ_API_URL = os.environ.get("ARQ_API_URL", None)
 ARQ_API_KEY = os.environ.get("ARQ_API_KEY", None)
     
-    
-aiohttpsession = ClientSession()
-
-arq = ARQ(ARQ_API_URL, ARQ_API_KEY, aiohttpsession)
+ 
 
 @bot.on_message(filters.command("lyrics") & ~filters.edited)
 async def lyrics_func(_, message):
@@ -45,5 +43,24 @@ async def lyrics_func(_, message):
         msg = f"**LYRICS_TOO_LONG:** [URL]({msg})"
     return await m.edit(msg)
 
-bot.start()
-print("BOT STARTED SUCCESSFULLY")
+async def main():
+        global arq
+        session = ClientSession()
+        arq = ARQ(ARQ_API_BASE_URL, ARQ_API_KEY, session)
+
+        await bot.start()
+        print(
+        """
+-----------------
+| Bot Started! |
+-----------------
+"""
+    )
+        await idle()
+
+
+    loop = get_event_loop()
+    loop.run_until_complete(main())
+
+
+
